@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+//components
+import { Header } from "@/components/Header";
+import Particles from "./components/particles";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -25,8 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+         className={`${poppins.variable} antialiased min-h-screen bg-gradient-to-tl from-[#030014] via-purple-800/10 to-[#030014]`}
       >
+             <Particles
+                className="absolute inset-0 -z-10 animate-fade-in"
+                quantity={100}
+              />
+        <Header />
         {children}
       </body>
     </html>
