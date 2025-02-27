@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 //components
 import { Header } from "@/components/Header";
 import Particles from "./components/particles";
+import { PageTransition } from "@/components/PageTransition";
+import { StairTransition } from "@/components/StairTransition";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-poppins",
 });
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  variable: "--font-jetbrainsMono",
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,14 +34,16 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-         className={`${poppins.variable} antialiased min-h-screen bg-gradient-to-tl from-[#030014] via-purple-800/10 to-[#030014]`}
+        className={`${poppins.variable} ${jetbrainsMono.variable} antialiased min-h-screen bg-gradient-to-tl from-black via-zinc-800/20 to-black`}
+        // className={`${poppins.variable} ${jetbrainsMono.variable} antialiased min-h-screen bg-gradient-to-tl from-[#030014] via-purple-800/10 to-[#030014]`}
       >
-             <Particles
-                className="absolute inset-0 -z-10 animate-fade-in"
-                quantity={100}
-              />
+        <Particles
+          className="absolute inset-0 -z-10 animate-fade-in"
+          quantity={100}
+        />
         <Header />
-        {children}
+        <StairTransition />
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );

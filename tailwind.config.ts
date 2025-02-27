@@ -1,4 +1,4 @@
-import { access } from "fs";
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -21,11 +21,12 @@ export default {
 			xl: "1200px"
 		},
 		fontFamily: {
-			primary: "var(--font-poppins)"
+			primary: "var(--font-poppins)",
+			secondary: "var(--font-jetbrainsMono)"
 		},
   		colors: {
 			background: '#000',
-  			primary: '#030014',
+  			primary: '#050505',
 			secondary: '#7A64FA',
   			accent: {
 				DEFAULT: '#00ff99',

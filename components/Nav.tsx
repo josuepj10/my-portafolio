@@ -24,8 +24,8 @@ const Nav = () => {
           href={link.path} //Set the href of the Link component
           key={index} //Set the key of the Link component
           className={`${
-            link.path === pathname ? "text-accent border-b-2 border-accent" : "" //If the link path is the same as the current path, add a border to the link
-          } capitalize font-medium hover:text-accent transition-all`} //Add classes to the Link component
+            link.path === pathname ? "text-secondary border-b-2 border-secondary" : "" //If the link path is the same as the current path, add a border to the link
+          } capitalize font-medium hover:text-secondary transition-all`} //Add classes to the Link component
         >
           {link.name}
         </Link>
