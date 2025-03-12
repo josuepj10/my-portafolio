@@ -8,34 +8,33 @@ import Image from "next/image";
 
 export const Header = () => {
   return (
-    // <header className="py-8 xl:py-12 text-white bg-primary bg-opacity-80">
-    <header className="py-8 xl:py-12 text-white">
+    <header className="py-4 text-white border-b border-gray-800 border-opacity-50 bg-primary/70 backdrop-blur-md fixed w-full">
       <div className="container mx-auto flex justify-between items-center">
-
         {/* Logo */}
         <Link href={"/"} className="flex items-center">
           <Image
-            src="/pj-logo-03.svg" // Reemplaza con la ruta de tu logo
+            src="/logo.svg" 
             alt="Logo"
-            width={50} // Ajusta el tamaño según necesidad
-            height={50}
+            width={40} // Ajusta el tamaño según necesidad
+            height={40}
             priority
           />
         </Link>
 
-        {/* desktop nav & here me button */}
+        {/* Desktop nav & hire me button */}
         <div className="hidden xl:flex items-center gap-8">
           <Nav />
           <Link href={"/#contact"}>
-            <Button>Hire me</Button>
+            <Button className="h-[34px] px-5 bg-white hover:bg-gray-300 transition-colors duration-300">
+              Hire me
+            </Button>
           </Link>
         </div>
 
         {/* Mobile nav */}
-      <div className="xl:hidden">
-        <MobileNav />
-      </div>
-
+        <div className="xl:hidden">
+          <MobileNav />
+        </div>
       </div>
     </header>
   );

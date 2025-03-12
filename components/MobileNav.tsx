@@ -1,12 +1,10 @@
 "use client";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CiMenuFries } from "react-icons/ci";
+import { motion } from "framer-motion";
 import clsx from "clsx";
-import Particles from "@/app/components/particles";
-import Image from "next/image";
 
 const links = [
   { name: "home", path: "/" },
@@ -18,46 +16,61 @@ const links = [
 
 export const MobileNav = () => {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden"; // Bloquear scroll
+    } else {
+      document.body.style.overflow = ""; // Restaurar scroll
+    }
+
+    return () => {
+      document.body.style.overflow = ""; // Asegurar restauración en desmontaje
+    };
+  }, [menuOpen]);
 
   return (
-    <Sheet>
-      <SheetTrigger className="flex justify-center items-center">
-        <CiMenuFries className="text-[32px] text-secondary" />
-      </SheetTrigger>
-      <SheetContent className="flex flex-col">
-        <Particles
-          className="absolute inset-0 -z-10 animate-fade-in"
-          quantity={100}
+    <div className="relative">
+      {/* Botón del menú */}
+      <button
+        className="flex flex-col items-center justify-center w-10 relative z-50"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        <motion.div
+          className="w-6 h-0.5 bg-white rounded"
+          animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 5 : 0 }}
+          transition={{ duration: 0.3 }}
         />
+        <motion.div
+          className="w-6 h-0.5 bg-white rounded mt-2"
+          animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -5 : 0 }}
+          transition={{ duration: 0.3 }}
+        />
+      </button>
 
-        {/* logo */}
-        <Link href={"/"} className="flex items-center">
-          <Image
-            src="/pj-logo-03.svg" // Reemplaza con la ruta de tu logo
-            alt="Logo"
-            width={50} // Ajusta el tamaño según necesidad
-            height={50}
-            priority
-          />
-        </Link>
-
-        {/* nav */}
-        <nav className="flex flex-col gap-8 justify-center items-center">
-          {links.map((link, index) => (
+      {/* Menú desplegable */}
+      {menuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="fixed top-[69px] left-0 w-full h-[calc(100vh-64px)] bg-primary flex flex-col items-start justify-start gap-6 text-white z-40 p-6"
+        >
+          {links.map((link) => (
             <Link
               key={link.path}
               href={link.path}
-              className={clsx(
-                "text-xl capitalize hover:text-secondary transition-all",
-                link.path === pathname &&
-                  "text-secondary border-b-2 border-secondary"
-              )}
+              className={clsx("hover:text-gray-400", {
+                "text-secondary": pathname === link.path,
+              })}
+              onClick={() => setMenuOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-        </nav>
-      </SheetContent>
-    </Sheet>
+        </motion.div>
+      )}
+    </div>
   );
 };
