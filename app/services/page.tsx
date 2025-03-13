@@ -1,6 +1,9 @@
+import { FaCode, FaMobileAlt, FaLaptopCode } from "react-icons/fa";
 
 export default function Services() {
   return (
-    <h1>Services page</h1>
-  )
+    <section id="services" className="h-screen flex flex-col justify-center items-center text-white">
+    <h1>Hola</h1>
+    </section>
+  );
 }

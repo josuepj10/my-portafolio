@@ -3,10 +3,10 @@ import { Poppins, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 //components
-import { Header } from "@/components/Header";
-import Particles from "./components/particles";
-import { PageTransition } from "@/components/PageTransition";
-import { StairTransition } from "@/components/StairTransition";
+import { Header } from "@/components/navigation/Header";
+import Particles from "../components/ui/particles";
+import { PageTransition } from "@/components/transitions/PageTransition";
+import { StairTransition } from "@/components/transitions/StairTransition";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,7 +34,8 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${poppins.variable} ${jetbrainsMono.variable} antialiased min-h-screen bg-gradient-to-tl from-black via-zinc-800/20 to-black`}
+        className={`${poppins.variable} ${jetbrainsMono.variable} antialiased min-h-screen bg-primary`}
+        // className={`${poppins.variable} ${jetbrainsMono.variable} antialiased min-h-screen bg-gradient-to-tl from-black via-zinc-800/20 to-black`}
         // className={`${poppins.variable} ${jetbrainsMono.variable} antialiased min-h-screen bg-gradient-to-tl from-[#030014] via-purple-800/10 to-[#030014]`}
       >
         <Particles
